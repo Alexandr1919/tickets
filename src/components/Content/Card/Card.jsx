@@ -6,6 +6,11 @@ import plane from '../../../assets/img/plane.png';
 
 import {Button} from '../../../styles/styles.js';
 
+import Date from '../../Utils/Date.jsx'
+import Price from '../../Utils/Price.jsx'
+import Transfers from '../../Utils/Transfers.jsx'
+
+
 const CardItem = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -73,23 +78,10 @@ const Airport = styled.span`
   white-space: nowrap;
 `;
 
-const Date = styled.span`
-  font-size: 12px;
-  color: ${styles.mutedColor};
-`;
-
 const Info = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: -55px;
-`;
-
-const Transfers = styled.span`
-  margin-bottom: 7px;
-  color: ${styles.mutedColor};
-  text-align: center;
-  font-size: 10px;
-  text-transform: uppercase;
 `;
 
 const Plane = styled.div`
@@ -112,43 +104,40 @@ const Plane = styled.div`
   }
 `;
 
-const card = () => {
+const card = ({card}) => {
+    console.log(card)
+    const {arrival_date, arrival_time, carrier, departure_date, departure_time, destination, destination_name, origin, origin_name, price, stops} = card;
+
     return (
         <CardItem>
             <Aside>
                 <img src={taLogo}/>
                 <Button>
-                    Купить<br/> за <span>21 032​₽</span>
+                    Купить<br/> за <Price price={price}/>
                 </Button>
             </Aside>
             <Content>
                 <Flight>
                     <Time>
-                        09:25
+                        {departure_time}
                     </Time>
                     <Airport>
-                        VVO, Владивосток
+                        {`${origin}, ${origin_name}`}
                     </Airport>
-                    <Date>
-                        9 окт 2018, Пт
-                    </Date>
+                    <Date date={departure_date}/>
                 </Flight>
                 <Info>
-                    <Transfers>
-                        3 пересадки
-                    </Transfers>
+                    <Transfers stops={stops}/>
                     <Plane/>
                 </Info>
                 <Flight>
                     <Time>
-                        11:45
+                        {arrival_time}
                     </Time>
                     <Airport>
-                        Тель-Авив, TLV
+                        {`${destination}, ${destination_name}`}
                     </Airport>
-                    <Date>
-                        10 окт 2018, Пт
-                    </Date>
+                    <Date date={arrival_date}/>
                 </Flight>
             </Content>
         </CardItem>

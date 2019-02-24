@@ -5,8 +5,11 @@
   "dependencies": {
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
+    "axios": "^0.18.0",
+    "moment": "^2.24.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-moment": "^0.8.4",
     "react-scripts": "2.1.5"
   },
   "scripts": {
